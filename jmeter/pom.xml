@@ -42,22 +42,37 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
             <plugin>
-                <groupId>com.lazerycode.jmeter</groupId>
-                <artifactId>jmeter-maven-plugin</artifactId>
-                <version>3.5.0</version>
-                <executions>
-                    <execution>
-                        <id>jmeter-tests</id>
-                        <goals>
-                            <goal>jmeter</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <testFilesDirectory>${project.basedir}/src/main/resources</testFilesDirectory>
-                    <resultsDirectory>${project.basedir}/src/main/resources</resultsDirectory>
-                </configuration>
-            </plugin>
+    <groupId>com.lazerycode.jmeter</groupId>
+    <artifactId>jmeter-maven-plugin</artifactId>
+    <version>2.2.0</version>
+    <executions>
+      <execution>
+        <id>jmeter-tests</id>
+        <phase>verify</phase>
+        <goals>
+          <goal>jmeter</goal>
+        </goals>
+      </execution>
+    </executions>
+  </plugin>
+  <plugin>
+    <groupId>com.lazerycode.jmeter</groupId>
+    <artifactId>jmeter-analysis-maven-plugin</artifactId>
+    <version>1.0.6</version>
+    <executions>
+      <execution>
+        <phase>verify</phase>
+        <goals>
+          <goal>analyze</goal>
+        </goals>
+        <configuration>
+          <source>${project.build.directory}/**/*.jtl</source>
+          <targetDirectory>${project.build.directory}/jmeter/results</targetDirectory>
+          <processAllFilesFound>true</processAllFilesFound>
+        </configuration>
+      </execution>
+     </executions>
+  </plugin>
         </plugins>
     </build>
 
